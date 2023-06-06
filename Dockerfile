@@ -14,7 +14,7 @@ RUN yarn install
 RUN apt-get update && apt-get install -y chromium
 
 # Copia o arquivo .env para o contêiner
-COPY .env /app/.env
+#COPY .env /app/.env
 
 # Define as variáveis de ambiente necessárias para o Puppeeter
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
