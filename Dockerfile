@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y chromium
 
 # Define as variáveis de ambiente necessárias para o Puppeeter
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV PUPPETEER_NO_SANDBOX=true
 
 # Define o comando padrão que será executado quando o contêiner for iniciado
 CMD yarn start
