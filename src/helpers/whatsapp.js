@@ -1,4 +1,5 @@
 import axios from "axios";
+import "dotenv/config";
 
 export class WhatsApp {
     static async sendMessage(message) {

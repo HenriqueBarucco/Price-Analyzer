@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import "dotenv/config";
 
 export default async function getPrice() {
     const browser = await puppeteer.launch({
