@@ -11,7 +11,8 @@ export default async function getPrice() {
     await page.goto(process.env.URL);
 
     let valor = await page.waitForXPath(
-        '//*[@id="blocoValores"]/div[2]/div[1]/h4'
+        '//*[@id="blocoValores"]/div[2]/div[1]/h4',
+        { timeout: 60000 }
     );
 
     valor = await valor.evaluate((node) => node.innerText);

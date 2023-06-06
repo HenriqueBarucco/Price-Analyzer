@@ -13,7 +13,6 @@ export class Application {
         await this.getPrice();
         setInterval(async () => {
             await this.getPrice();
-            console.log(this.price);
             this.verifyPrice();
         }, 10000);
     }
