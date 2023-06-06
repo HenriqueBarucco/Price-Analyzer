@@ -15,7 +15,7 @@ export class Application {
             await this.getPrice();
             console.log({ price: this.price });
             this.verifyPrice();
-        }, 10000);
+        }, 300000);
     }
 
     async getPrice() {
