@@ -1,4 +1,4 @@
-import getPrice from "./helpers/puppeteer.js";
+import getPrice from "./helpers/scrappy.js";
 import { WhatsApp } from "./helpers/whatsapp.js";
 
 export class Application {
