@@ -1,7 +1,10 @@
 import puppeteer from "puppeteer";
 
 export default async function getPrice() {
-    const browser = await puppeteer.launch({ headless: "new" });
+    const browser = await puppeteer.launch({
+        headless: "new",
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
 
     await page.goto(process.env.URL);
