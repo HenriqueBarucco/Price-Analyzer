@@ -4051,11 +4051,6 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-nest-puppeteer@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/nest-puppeteer/-/nest-puppeteer-1.1.1.tgz"
-  integrity sha512-kyYn4SuI9nVInEXrnf2ZMxrzRiQO6wJ5lkriaf5cODAflB/UQCNko3Cc4aqULlSW32Jfo6lErlfeU0JtCARpXg==
-
 netmask@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/netmask/-/netmask-2.0.2.tgz"

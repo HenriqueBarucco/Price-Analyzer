@@ -27,7 +27,6 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/schedule": "^4.0.0",
     "axios": "^1.6.1",
-    "nest-puppeteer": "^1.1.1",
     "puppeteer": "^21.5.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
