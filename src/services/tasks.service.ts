@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { BrowserService } from './browser.service';
 import { Product } from 'src/types/Product';
 import { EasyWhatsAppService } from './easy-whatsapp.service';
@@ -13,7 +13,8 @@ export class TasksService {
 
   private readonly logger = new Logger(TasksService.name);
 
-  @Cron('0 */3 8-23 * *')
+  //@Cron('0 */3 8-23 * *')
+  @Cron(CronExpression.EVERY_10_SECONDS)
   handleHourlyJob() {
     this.logger.log('Calling Price-Analyzer API');
 
