@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TasksService } from 'src/services/tasks.service';
-import { EasyWhatsAppModule } from './easy-whatsapp.module';
-import { BrowserModule } from './browser.module';
+import { AnalyserModule } from './analyser.module';
 
 @Module({
-  imports: [EasyWhatsAppModule, BrowserModule],
+  imports: [AnalyserModule],
   providers: [TasksService],
   exports: [TasksService],
 })
