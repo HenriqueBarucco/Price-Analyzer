@@ -1,17 +1,9 @@
-import { Module } from '@nestjs/common';
-import { ScheduleModule } from '@nestjs/schedule';
-import { TasksModule } from './tasks.module';
-import { ConfigModule } from '@nestjs/config';
-import { AppController } from 'src/controllers/app.controller';
-import { AnalyserModule } from './analyser.module';
+import { Module } from '@nestjs/common'
+import { ScheduleModule } from '@nestjs/schedule'
+import { ConfigModule } from '@nestjs/config'
+import { AnalyserModule } from './analyser.module'
 
 @Module({
-  imports: [
-    ScheduleModule.forRoot(),
-    ConfigModule.forRoot(),
-    AnalyserModule,
-    TasksModule,
-  ],
-  controllers: [AppController],
+  imports: [ScheduleModule.forRoot(), ConfigModule.forRoot(), AnalyserModule],
 })
 export class AppModule {}
