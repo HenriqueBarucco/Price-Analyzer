@@ -25,7 +25,7 @@ export class AnalyzerService {
       return
     }
 
-    this.rabbitMQService.sendMessage('product-processed', {
+    this.rabbitMQService.sendMessage(process.env.RABBITMQ_PROCESSED_QUEUE, {
       id,
       value,
     })

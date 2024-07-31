@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common'
 import OpenAI from 'openai'
-import 'dotenv/config'
 
 @Injectable()
 export class OpenAIService {

@@ -32,25 +32,30 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
   }
 
   private async connect() {
-    this.connection = await amqp.connect('amqp://localhost:5672')
+    this.connection = await amqp.connect(process.env.RABBITMQ_URL)
     this.channel = await this.connection.createChannel()
-    await this.channel.assertQueue('product-process', { durable: true })
+    await this.channel.assertQueue(process.env.RABBITMQ_PROCESS_QUEUE, {
+      durable: true,
+    })
     this.channel.prefetch(1)
   }
 
   async consume() {
-    await this.channel.consume('product-process', async (msg) => {
-      if (msg !== null) {
-        const content = msg.content.toString()
-        const product = JSON.parse(content) as { id: string; url: string }
+    await this.channel.consume(
+      process.env.RABBIT_MQ_PROCESS_QUEUE,
+      async (msg) => {
+        if (msg !== null) {
+          const content = msg.content.toString()
+          const product = JSON.parse(content) as { id: string; url: string }
 
-        this.logger.log(`Processing product ${product.id}...`)
-        await this.analyzerService.process(product)
-        this.logger.log(`Product ${product.id} processed!`)
+          this.logger.log(`Processing product ${product.id}...`)
+          await this.analyzerService.process(product)
+          this.logger.log(`Product ${product.id} processed!`)
 
-        this.channel.ack(msg)
-      }
-    })
+          this.channel.ack(msg)
+        }
+      },
+    )
   }
 
   async sendMessage(
@@ -59,7 +64,7 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
   ) {
     const msgBuffer = Buffer.from(JSON.stringify(message))
 
-    this.channel.publish('baxo-exchange', routingKey, msgBuffer, {
+    this.channel.publish(process.env.RABBITMQ_EXCHANGE, routingKey, msgBuffer, {
       persistent: true,
     })
   }
