@@ -12,7 +12,7 @@ export class PuppeteerService {
     })
   }
 
-  async getScreenshot(url: string): Promise<string> {
+  async getScreenshot({ url }: { url: string }): Promise<string> {
     if (!this.browser) {
       await this.initBrowser()
     }

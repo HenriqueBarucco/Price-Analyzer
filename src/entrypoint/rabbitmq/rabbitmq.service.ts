@@ -5,6 +5,7 @@ import { AnalyzerService } from 'src/domain/analyser.service'
 @Injectable()
 export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
   constructor(private readonly analyzerService: AnalyzerService) {}
+
   private connection: amqp.Connection
   private channel: amqp.Channel
 
@@ -22,9 +23,10 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
     this.connection = await amqp.connect('amqp://localhost:5672')
     this.channel = await this.connection.createChannel()
     await this.channel.assertQueue('product-process', { durable: true })
+    this.channel.prefetch(1)
   }
 
-  private async consume() {
+  async consume() {
     await this.channel.consume('product-process', async (msg) => {
       if (msg !== null) {
         const content = msg.content.toString()

@@ -4,7 +4,7 @@ import { PuppeteerModule } from 'src/libs/puppeteer/puppeteer.module'
 import { AnalyzerService } from './analyser.service'
 
 @Module({
-  imports: [OpenAIModule, PuppeteerModule],
+  imports: [PuppeteerModule, OpenAIModule],
   providers: [AnalyzerService],
   exports: [AnalyzerService],
 })

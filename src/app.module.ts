@@ -6,7 +6,5 @@ import { OpenAIModule } from './libs/openai/openai.module'
 
 @Module({
   imports: [RabbitMqModule, AnalyserModule, PuppeteerModule, OpenAIModule],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
