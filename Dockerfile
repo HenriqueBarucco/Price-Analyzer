@@ -19,7 +19,5 @@ COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/package*.json /app
 COPY --from=builder /app/dist /app/dist
 
-RUN node /app/node_modules/puppeteer/install.mjs
-
 EXPOSE 3000
 CMD [ "npm", "run", "start:prod" ]
