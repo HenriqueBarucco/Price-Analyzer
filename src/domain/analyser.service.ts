@@ -17,6 +17,9 @@ export class AnalyzerService {
 
   async process({ id, url }: { id: string; url: string }) {
     const screenshot = await this.puppeteerService.getScreenshot({ url })
+    this.logger.log(
+      `Base64 screenshot for product ${id} captured! [${screenshot}]`,
+    )
 
     const value = await this.openAiService.getValue(screenshot)
 
