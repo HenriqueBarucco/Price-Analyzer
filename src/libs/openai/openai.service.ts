@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import OpenAI from 'openai'
 import 'dotenv/config'
 
 @Injectable()
 export class OpenAIService {
+  private readonly logger = new Logger(OpenAIService.name)
+
   constructor() {
     this.ai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
@@ -12,7 +14,7 @@ export class OpenAIService {
 
   private ai: OpenAI
 
-  async getPrice(base64: string): Promise<number | null> {
+  async getValue(base64: string): Promise<number | null> {
     const response = await this.ai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -38,7 +40,7 @@ export class OpenAIService {
     const price = parseFloat(content)
 
     if (isNaN(price)) {
-      console.error(`Não foi possível identificar o preço: ${content}`)
+      this.logger.error(`Unable to identify the price: ${content}`)
       return null
     }
 

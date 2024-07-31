@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common'
+import { forwardRef, Module } from '@nestjs/common'
 import { RabbitMQService } from './rabbitmq.service'
 import { AnalyserModule } from 'src/domain/analyser.module'
 
 @Module({
-  imports: [AnalyserModule],
+  imports: [forwardRef(() => AnalyserModule)],
   providers: [RabbitMQService],
   exports: [RabbitMQService],
 })

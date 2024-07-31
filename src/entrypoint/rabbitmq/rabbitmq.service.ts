@@ -1,10 +1,22 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common'
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  Logger,
+  OnModuleDestroy,
+  OnModuleInit,
+} from '@nestjs/common'
 import * as amqp from 'amqplib'
 import { AnalyzerService } from 'src/domain/analyser.service'
 
 @Injectable()
 export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
-  constructor(private readonly analyzerService: AnalyzerService) {}
+  private readonly logger = new Logger(RabbitMQService.name)
+
+  constructor(
+    @Inject(forwardRef(() => AnalyzerService))
+    private readonly analyzerService: AnalyzerService,
+  ) {}
 
   private connection: amqp.Connection
   private channel: amqp.Channel
@@ -32,10 +44,23 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
         const content = msg.content.toString()
         const product = JSON.parse(content) as { id: string; url: string }
 
+        this.logger.log(`Processing product ${product.id}...`)
         await this.analyzerService.process(product)
+        this.logger.log(`Product ${product.id} processed!`)
 
         this.channel.ack(msg)
       }
+    })
+  }
+
+  async sendMessage(
+    routingKey: string,
+    message: { id: string; value: number },
+  ) {
+    const msgBuffer = Buffer.from(JSON.stringify(message))
+
+    this.channel.publish('baxo-exchange', routingKey, msgBuffer, {
+      persistent: true,
     })
   }
 }
