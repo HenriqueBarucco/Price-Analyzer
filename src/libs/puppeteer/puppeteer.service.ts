@@ -1,39 +1,32 @@
-import type { Browser } from 'puppeteer'
 import { Injectable } from '@nestjs/common'
-import puppeteer from 'puppeteer'
+import puppeteer, { Browser } from 'puppeteer'
 
 @Injectable()
-export class BrowserService {
-  constructor() {
-    this.browser = null
-  }
-
+export class PuppeteerService {
   private browser: Browser
 
   async initBrowser() {
     this.browser = await puppeteer.launch({
-      headless: 'new',
+      headless: true,
       args: ['--no-sandbox'],
     })
   }
 
-  async getPrice(url: string, selector: string) {
+  async getScreenshot(url: string): Promise<string> {
     if (!this.browser) {
       await this.initBrowser()
     }
 
     const page = await this.browser.newPage()
+    await page.setViewport({ width: 1920, height: 1080 })
+
     await page.goto(url)
 
-    await page.waitForXPath(selector)
-
-    const xPath = await page.$x(selector)
-
-    const value = await page.evaluate((price) => price.textContent, xPath[0])
+    const screenshot = await page.screenshot()
 
     await this.closeBrowser()
 
-    return value
+    return screenshot.toString('base64')
   }
 
   async closeBrowser() {
