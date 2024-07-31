@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { PuppeteerService } from './puppeteer.service';
+import { Module } from '@nestjs/common'
+import { PuppeteerService } from './puppeteer.service'
 
 @Module({
   providers: [PuppeteerService],
