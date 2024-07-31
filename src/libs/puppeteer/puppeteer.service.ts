@@ -20,7 +20,7 @@ export class PuppeteerService {
     const page = await this.browser.newPage()
     await page.setViewport({ width: 1920, height: 1080 })
 
-    await page.goto(url)
+    await page.goto(url, { waitUntil: 'load' })
 
     const screenshot = await page.screenshot()
 

@@ -29,5 +29,7 @@ export class AnalyzerService {
       id,
       value,
     })
+
+    this.logger.warn(`Product ${id} processed!`)
   }
 }

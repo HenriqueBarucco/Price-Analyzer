@@ -50,7 +50,6 @@ export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
 
           this.logger.log(`Processing product ${product.id}...`)
           await this.analyzerService.process(product)
-          this.logger.log(`Product ${product.id} processed!`)
 
           this.channel.ack(msg)
         }
